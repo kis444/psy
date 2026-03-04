@@ -1,30 +1,36 @@
 backend:
   name: github
-  repo: kis444/psy  # Numele tău de utilizator / numele repository-ului
+  repo: kis444/psy
   branch: main
   site_domain: localhost:3000
-
-# restul configurației rămâne la fel
 
 local_backend: true
 media_folder: public/images
 public_folder: /images
 
 collections:
-  - name: "blog"
-    label: "Blog Posts"
-    folder: "content/blog"
-    create: true
-    fields:
-      - { label: 'AI Assistant', name: 'ai_chat', widget: 'ai-chat', required: false, owner: 'kis444', repo: 'psy', branch: 'main' }
-      - { label: "Title (EN)", name: "title_en", widget: "string" }
-      - { label: "Title (RO)", name: "title_ro", widget: "string", required: false }
-      - { label: "Title (RU)", name: "title_ru", widget: "string", required: false }
-      - { label: "Body (EN)", name: "body_en", widget: "markdown" }
-      - { label: "Body (RO)", name: "body_ro", widget: "markdown", required: false }
-      - { label: "Body (RU)", name: "body_ru", widget: "markdown", required: false }
-      
-          - label: "Services Section"
+  - name: "site"
+    label: "Site Content"
+    files:
+      - name: "general"
+        label: "General Content"
+        file: "content/site/general.json"
+        fields:
+          - label: "Hero Section"
+            name: "hero"
+            widget: "object"
+            fields:
+              - {label: "Welcome Text (EN)", name: "welcome_en", widget: "string"}
+              - {label: "Welcome Text (RO)", name: "welcome_ro", widget: "string"}
+              - {label: "Welcome Text (RU)", name: "welcome_ru", widget: "string"}
+              - {label: "Title (EN)", name: "title_en", widget: "string"}
+              - {label: "Title (RO)", name: "title_ro", widget: "string"}
+              - {label: "Title (RU)", name: "title_ru", widget: "string"}
+              - {label: "Description (EN)", name: "description_en", widget: "text"}
+              - {label: "Description (RO)", name: "description_ro", widget: "text"}
+              - {label: "Description (RU)", name: "description_ru", widget: "text"}
+          
+          - label: "Services"
             name: "services"
             widget: "list"
             fields:
@@ -47,14 +53,14 @@ collections:
     fields:
       - {label: "Slug (URL)", name: "slug", widget: "string"}
       - {label: "Title (EN)", name: "title_en", widget: "string"}
-      - {label: "Title (RO)", name: "title_ro", widget: "string", required: false}
-      - {label: "Title (RU)", name: "title_ru", widget: "string", required: false}
+      - {label: "Title (RO)", name: "title_ro", widget: "string"}
+      - {label: "Title (RU)", name: "title_ru", widget: "string"}
       - {label: "Excerpt (EN)", name: "excerpt_en", widget: "text"}
-      - {label: "Excerpt (RO)", name: "excerpt_ro", widget: "text", required: false}
-      - {label: "Excerpt (RU)", name: "excerpt_ru", widget: "text", required: false}
+      - {label: "Excerpt (RO)", name: "excerpt_ro", widget: "text"}
+      - {label: "Excerpt (RU)", name: "excerpt_ru", widget: "text"}
       - {label: "Category", name: "category", widget: "string"}
       - {label: "Date", name: "date", widget: "datetime"}
       - {label: "Image", name: "image", widget: "image"}
       - {label: "Body (EN)", name: "body_en", widget: "markdown"}
-      - {label: "Body (RO)", name: "body_ro", widget: "markdown", required: false}
-      - {label: "Body (RU)", name: "body_ru", widget: "markdown", required: false}
+      - {label: "Body (RO)", name: "body_ro", widget: "markdown"}
+      - {label: "Body (RU)", name: "body_ru", widget: "markdown"}
