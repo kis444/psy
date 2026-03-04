@@ -1,5 +1,4 @@
-// ACESTE DATE LE EDIȚEZI DOAR TU (DEZVOLTATORUL)
-// Clienta NU are acces în CMS la acestea
+// lib/site-config.ts
 
 export type Locale = "en" | "ro" | "ru"
 

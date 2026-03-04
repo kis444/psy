@@ -1,177 +1,170 @@
-import type { Metadata } from "next"
-import Link from "next/link"
-import { ArrowRight, Monitor, MapPin, Sparkles } from "lucide-react"
-import { services } from "@/lib/content"
-import { Section, SectionHeader } from "@/components/section"
+"use client"
 
-export const metadata: Metadata = {
-  title: "Services",
-  description:
-    "Explore professional psychological services including individual therapy, couples therapy, online consultations, and more.",
+import { useEffect, useState } from "react"
+import { Check, Wifi, WifiOff, Globe, Heart } from "lucide-react"
+import { Section, SectionHeader } from "@/components/section"
+import { useLanguage } from "@/context/LanguageContext"
+import { getCmsContent, getLocalizedValue } from "@/lib/content-utils"
+import { cn } from "@/lib/utils"
+
+type Service = {
+  id: string
+  title_en: string
+  title_ro: string
+  title_ru: string
+  description_en: string
+  description_ro: string
+  description_ru: string
+  price: number
+  currency: string
+  duration: string
+  mode: "online" | "offline" | "online & offline"
+  featured: boolean
 }
 
 function getModeIcon(mode: string) {
-  if (mode === "online") return Monitor
-  if (mode === "offline") return MapPin
-  return Sparkles
+  switch(mode) {
+    case "online": return Wifi
+    case "offline": return WifiOff
+    case "online & offline": return Globe
+    default: return Heart
+  }
 }
 
-function getModeLabel(mode: string) {
-  if (mode === "online") return "Online"
-  if (mode === "offline") return "In-Person"
-  return "Online & In-Person"
+function getModeText(mode: string, locale: string) {
+  if (mode === "online") {
+    return locale === "en" ? "Online" : locale === "ro" ? "Online" : "Онлайн"
+  }
+  if (mode === "offline") {
+    return locale === "en" ? "In-person" : locale === "ro" ? "Fizic" : "Очно"
+  }
+  return locale === "en" ? "Online & In-person" : locale === "ro" ? "Online & Fizic" : "Онлайн и Очно"
 }
 
 export default function ServicesPage() {
-  return (
-    <>
-      {/* Hero */}
+  const { locale } = useLanguage()
+  const [services, setServices] = useState<Service[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    console.log("🚀 Începe încărcarea serviciilor...")
+    getCmsContent<{services: Service[]}>('services')
+      .then((data) => {
+        console.log("📦 Date primite de la CMS:", data)
+        if (data?.services) {
+          console.log(`✅ Am găsit ${data.services.length} servicii`)
+          setServices(data.services)
+        } else {
+          console.log("❌ Nu s-au găsit servicii în date")
+        }
+        setLoading(false)
+      })
+      .catch((error) => {
+        console.error("💥 Eroare la încărcare:", error)
+        setLoading(false)
+      })
+  }, [])
+
+  if (loading) {
+    return (
       <Section>
-        <div className="max-w-3xl mx-auto text-center">
-          <p className="text-sm font-medium uppercase tracking-widest text-primary mb-4">
-            Services
-          </p>
-          <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight text-balance">
-            Therapeutic services tailored to you
-          </h1>
-          <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto text-pretty">
-            Every person is unique, and so is their path to healing. Explore my
-            range of services and find the support that best fits your needs.
+        <div className="flex justify-center items-center min-h-[400px]">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+        </div>
+      </Section>
+    )
+  }
+
+  if (services.length === 0) {
+    return (
+      <Section>
+        <div className="text-center py-16">
+          <p className="text-muted-foreground">
+            {locale === "en" ? "No services available yet." : 
+             locale === "ro" ? "Nu există servicii disponibile încă." : 
+             "Услуги пока недоступны."}
           </p>
         </div>
       </Section>
+    )
+  }
 
-      {/* Services Grid */}
+  return (
+    <>
+      <Section>
+        <SectionHeader
+          label={locale === "en" ? "Services" : locale === "ro" ? "Servicii" : "Услуги"}
+          title={locale === "en" ? "How I Can Help" : locale === "ro" ? "Cum Te Pot Ajuta" : "Как Я Могу Помочь"}
+          description={locale === "en" 
+            ? "Professional psychological support tailored to your unique needs and circumstances."
+            : locale === "ro"
+            ? "Suport psihologic profesionist adaptat nevoilor și circumstanțelor tale unice."
+            : "Профессиональная психологическая поддержка, адаптированная к вашим уникальным потребностям и обстоятельствам."}
+        />
+      </Section>
+
       <Section variant="soft" className="pt-0">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {services.map((service) => {
             const ModeIcon = getModeIcon(service.mode)
+            const modeText = getModeText(service.mode, locale)
+            
             return (
               <div
                 key={service.id}
-                className={`relative rounded-2xl p-8 flex flex-col transition-all hover:shadow-lg ${
+                className={cn(
+                  "relative rounded-2xl p-8 transition-all hover:shadow-lg",
                   service.featured
-                    ? "bg-primary text-primary-foreground shadow-md ring-2 ring-primary/20"
+                    ? "bg-primary text-primary-foreground shadow-md"
                     : "bg-card text-card-foreground"
-                }`}
+                )}
               >
                 {service.featured && (
                   <span className="absolute top-4 right-4 bg-background text-foreground text-xs font-semibold px-3 py-1 rounded-full">
-                    -50% OFF
+                    {locale === "en" ? "-50% OFF" : locale === "ro" ? "-50% REDUCERE" : "-50% СКИДКА"}
                   </span>
                 )}
+                
                 <h3 className="font-serif text-xl font-semibold mb-3">
-                  {service.title}
+                  {getLocalizedValue(service, 'title', locale)}
                 </h3>
-                <p
-                  className={`text-sm leading-relaxed mb-6 flex-1 ${
-                    service.featured ? "opacity-90" : "text-muted-foreground"
-                  }`}
-                >
-                  {service.description}
+                
+                <p className={cn(
+                  "text-sm leading-relaxed mb-6",
+                  service.featured ? "opacity-90" : "text-muted-foreground"
+                )}>
+                  {getLocalizedValue(service, 'description', locale)}
                 </p>
 
                 <div className="flex items-center gap-2 mb-4">
-                  <ModeIcon
-                    className={`h-4 w-4 ${
-                      service.featured ? "opacity-70" : "text-primary"
-                    }`}
-                  />
-                  <span
-                    className={`text-xs font-medium ${
-                      service.featured ? "opacity-70" : "text-muted-foreground"
-                    }`}
-                  >
-                    {getModeLabel(service.mode)}
-                  </span>
+                  <ModeIcon className="h-4 w-4" />
+                  <span className="text-xs">{modeText}</span>
                 </div>
 
-                <div className="flex items-end justify-between pt-4 border-t ${service.featured ? 'border-primary-foreground/20' : 'border-border'}">
+                <div className="flex items-end justify-between">
                   <div>
                     <p className="text-2xl font-bold">
-                      {service.currency === "EUR" ? "\u20AC" : "$"}
+                      {service.currency === "EUR" ? "€" : "$"}
                       {service.price}
                     </p>
-                    <p
-                      className={`text-xs ${
-                        service.featured ? "opacity-70" : "text-muted-foreground"
-                      }`}
-                    >
+                    <p className={cn(
+                      "text-xs",
+                      service.featured ? "opacity-70" : "text-muted-foreground"
+                    )}>
                       {service.duration}
                     </p>
                   </div>
-                  <Link
-                    href="/contact"
-                    className={`inline-flex items-center gap-1 text-sm font-medium ${
-                      service.featured
-                        ? "text-primary-foreground hover:opacity-80"
-                        : "text-primary hover:underline"
-                    }`}
-                  >
-                    Book Now <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
+                  
+                  <div className={cn(
+                    "w-8 h-8 rounded-full flex items-center justify-center",
+                    service.featured ? "bg-background/20" : "bg-primary/10"
+                  )}>
+                    <Check className="h-4 w-4" />
+                  </div>
                 </div>
               </div>
             )
           })}
-        </div>
-      </Section>
-
-      {/* Online vs Offline */}
-      <Section>
-        <SectionHeader
-          label="Choose your format"
-          title="Online or In-Person"
-          description="Flexibility to choose the format that works best for your schedule and comfort."
-        />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-          <div className="rounded-2xl bg-secondary p-10 flex flex-col items-center text-center">
-            <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-primary/10 mb-6">
-              <Monitor className="h-7 w-7 text-primary" />
-            </div>
-            <h3 className="font-serif text-2xl font-semibold text-foreground mb-3">
-              Online Sessions
-            </h3>
-            <p className="text-muted-foreground leading-relaxed text-pretty">
-              Access professional therapy from anywhere in the world. Our secure
-              video platform ensures the same quality of care as in-person
-              visits, with the convenience of connecting from your preferred
-              environment.
-            </p>
-          </div>
-          <div className="rounded-2xl bg-accent p-10 flex flex-col items-center text-center">
-            <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-primary/10 mb-6">
-              <MapPin className="h-7 w-7 text-primary" />
-            </div>
-            <h3 className="font-serif text-2xl font-semibold text-foreground mb-3">
-              In-Person Sessions
-            </h3>
-            <p className="text-muted-foreground leading-relaxed text-pretty">
-              Visit our warm, welcoming office in the heart of Chisinau. The
-              physical space has been carefully designed to create a calm,
-              supportive atmosphere that promotes healing and open communication.
-            </p>
-          </div>
-        </div>
-      </Section>
-
-      {/* CTA */}
-      <Section variant="soft">
-        <div className="rounded-3xl bg-primary p-10 md:p-16 text-center text-primary-foreground">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-balance">
-            Not sure which service is right for you?
-          </h2>
-          <p className="mt-4 text-base opacity-90 max-w-lg mx-auto text-pretty">
-            Book an introductory consultation and we will find the best
-            therapeutic approach together. First session at 50% off.
-          </p>
-          <Link
-            href="/contact"
-            className="mt-8 inline-flex items-center justify-center rounded-full bg-background text-foreground px-8 py-3.5 text-base font-semibold transition-all hover:opacity-90 gap-2"
-          >
-            Book First Consultation
-            <ArrowRight className="h-4 w-4" />
-          </Link>
         </div>
       </Section>
     </>
