@@ -1,0 +1,66 @@
+backend:
+  name: github
+  repo: nume-utilizator/nume-repo  # Vom completa asta mai târziu
+  branch: main
+  site_domain: localhost:3000
+
+local_backend: true
+media_folder: public/images
+public_folder: /images
+
+collections:
+  - name: "site"
+    label: "Site Content"
+    files:
+      - name: "general"
+        label: "General Content"
+        file: "content/site/general.json"
+        fields:
+          - label: "Hero Section"
+            name: "hero"
+            widget: "object"
+            fields:
+              - {label: "Welcome Text (EN)", name: "welcome_en", widget: "string", default: "Welcome to a safe space"}
+              - {label: "Welcome Text (RO)", name: "welcome_ro", widget: "string", default: "Bun venit într-un spațiu sigur"}
+              - {label: "Welcome Text (RU)", name: "welcome_ru", widget: "string", default: "Добро пожаловать в безопасное пространство"}
+              - {label: "Title (EN)", name: "title_en", widget: "string", default: "Your journey to inner peace starts here"}
+              - {label: "Title (RO)", name: "title_ro", widget: "string", default: "Călătoria ta către pacea interioară începe aici"}
+              - {label: "Title (RU)", name: "title_ru", widget: "string", default: "Ваше путешествие к внутреннему покою начинается здесь"}
+              - {label: "Description (EN)", name: "description_en", widget: "text", default: "Professional psychological support in a warm, confidential setting."}
+              - {label: "Description (RO)", name: "description_ro", widget: "text", default: "Suport psihologic profesionist într-un cadru cald și confidențial."}
+              - {label: "Description (RU)", name: "description_ru", widget: "text", default: "Профессиональная психологическая поддержка в теплой, конфиденциальной обстановке."}
+          
+          - label: "Services Section"
+            name: "services"
+            widget: "list"
+            fields:
+              - {label: "ID", name: "id", widget: "string"}
+              - {label: "Title (EN)", name: "title_en", widget: "string"}
+              - {label: "Title (RO)", name: "title_ro", widget: "string"}
+              - {label: "Title (RU)", name: "title_ru", widget: "string"}
+              - {label: "Description (EN)", name: "description_en", widget: "text"}
+              - {label: "Description (RO)", name: "description_ro", widget: "text"}
+              - {label: "Description (RU)", name: "description_ru", widget: "text"}
+              - {label: "Price", name: "price", widget: "number"}
+              - {label: "Duration", name: "duration", widget: "string"}
+              - {label: "Featured", name: "featured", widget: "boolean", default: false}
+
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "content/blog"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Slug (URL)", name: "slug", widget: "string"}
+      - {label: "Title (EN)", name: "title_en", widget: "string"}
+      - {label: "Title (RO)", name: "title_ro", widget: "string", required: false}
+      - {label: "Title (RU)", name: "title_ru", widget: "string", required: false}
+      - {label: "Excerpt (EN)", name: "excerpt_en", widget: "text"}
+      - {label: "Excerpt (RO)", name: "excerpt_ro", widget: "text", required: false}
+      - {label: "Excerpt (RU)", name: "excerpt_ru", widget: "text", required: false}
+      - {label: "Category", name: "category", widget: "string"}
+      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "Image", name: "image", widget: "image"}
+      - {label: "Body (EN)", name: "body_en", widget: "markdown"}
+      - {label: "Body (RO)", name: "body_ro", widget: "markdown", required: false}
+      - {label: "Body (RU)", name: "body_ru", widget: "markdown", required: false}

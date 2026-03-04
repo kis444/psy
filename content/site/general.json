@@ -1,0 +1,39 @@
+{
+  "hero": {
+    "welcome_en": "Welcome to a safe space",
+    "welcome_ro": "Bun venit într-un spațiu sigur",
+    "welcome_ru": "Добро пожаловать в безопасное пространство",
+    "title_en": "Your journey to inner peace starts here",
+    "title_ro": "Călătoria ta către pacea interioară începe aici",
+    "title_ru": "Ваше путешествие к внутреннему покою начинается здесь",
+    "description_en": "Professional psychological support in a warm, confidential setting.",
+    "description_ro": "Suport psihologic profesionist într-un cadru cald și confidențial.",
+    "description_ru": "Профессиональная психологическая поддержка в теплой, конфиденциальной обстановке."
+  },
+  "services": [
+    {
+      "id": "individual-therapy",
+      "title_en": "Individual Therapy",
+      "title_ro": "Terapie Individuală",
+      "title_ru": "Индивидуальная Терапия",
+      "description_en": "One-on-one sessions tailored to your needs.",
+      "description_ro": "Ședințe individuale adaptate nevoilor tale.",
+      "description_ru": "Индивидуальные сессии, адаптированные к вашим потребностям.",
+      "price": 80,
+      "duration": "50 min",
+      "featured": false
+    },
+    {
+      "id": "first-consultation",
+      "title_en": "First Consultation",
+      "title_ro": "Prima Consultație",
+      "title_ru": "Первая Консультация",
+      "description_en": "An introductory session at 50% off for new clients.",
+      "description_ro": "O sesiune introductivă cu 50% reducere pentru clienții noi.",
+      "description_ru": "Вводная сессия со скидкой 50% для новых клиентов.",
+      "price": 40,
+      "duration": "50 min",
+      "featured": true
+    }
+  ]
+}
