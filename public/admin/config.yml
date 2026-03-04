@@ -1,8 +1,10 @@
 backend:
   name: github
-  repo: nume-utilizator/nume-repo  # Vom completa asta mai târziu
+  repo: kis444/psy  # Numele tău de utilizator / numele repository-ului
   branch: main
   site_domain: localhost:3000
+
+# restul configurației rămâne la fel
 
 local_backend: true
 media_folder: public/images
