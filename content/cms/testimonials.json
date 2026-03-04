@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Maria S.",
+    "text_en": "Dr. Popovici helped me through one of the most difficult periods of my life. Her warmth and professionalism made every session feel safe and productive. I cannot recommend her enough.",
+    "text_ro": "Doamna Popovici m-a ajutat în una dintre cele mai dificile perioade ale vieții mele. Căldura și profesionalismul ei au făcut ca fiecare ședință să fie sigură și productivă. Nu pot s-o recomand suficient.",
+    "text_ru": "Доктор Попович помогла мне пройти через один из самых трудных периодов моей жизни. Ее теплота и профессионализм делали каждую сессию безопасной и продуктивной. Я не могу ее достаточно рекомендовать.",
+    "rating": 5
+  },
+  {
+    "name": "Alexandra D.",
+    "text_en": "After years of struggling with anxiety, I finally found someone who truly listens and understands. The techniques I learned here have transformed my daily life.",
+    "text_ro": "După ani de luptă cu anxietatea, am găsit în sfârșit pe cineva care ascultă cu adevărat și înțelege. Tehnicile învățate aici mi-au transformat viața de zi cu zi.",
+    "text_ru": "После многих лет борьбы с тревогой я наконец нашла человека, который действительно слушает и понимает. Техники, которые я здесь изучила, изменили мою повседневную жизнь.",
+    "rating": 5
+  },
+  {
+    "name": "Ion P.",
+    "text_en": "Couples therapy with Dr. Popovici saved our marriage. She has an incredible ability to help both partners feel heard while guiding us toward real solutions.",
+    "text_ro": "Terapia de cuplu cu doamna Popovici ne-a salvat căsnicia. Are o abilitate incredibilă de a ajuta ambii parteneri să se simtă auziți, ghidându-ne către soluții reale.",
+    "text_ru": "Семейная терапия с доктором Попович спасла наш брак. У нее невероятная способность помогать обоим партнерам чувствовать себя услышанными, направляя нас к реальным решениям.",
+    "rating": 5
+  },
+  {
+    "name": "Natalia R.",
+    "text_en": "I was skeptical about therapy at first, but Dr. Popovici's gentle approach quickly put me at ease. She helped me discover strengths I didn't know I had.",
+    "text_ro": "Eram sceptică la început, dar abordarea blândă a doamnei Popovici m-a liniștit rapid. M-a ajutat să descopăr puncte forte pe care nu știam că le am.",
+    "text_ru": "Сначала я скептически относилась к терапии, но мягкий подход доктора Попович быстро меня успокоил. Она помогла мне обнаружить сильные стороны, о которых я не знала.",
+    "rating": 5
+  },
+  {
+    "name": "Dmitri K.",
+    "text_en": "Professional, empathetic, and genuinely caring. The online sessions were just as effective as in-person. I finally feel like myself again.",
+    "text_ro": "Profesionist, empatic și cu adevărat grijuliu. Ședințele online au fost la fel de eficiente ca cele fizice. În sfârșit mă simt din nou eu însumi.",
+    "text_ru": "Профессионально, чутко и искренне заботливо. Онлайн-сессии были так же эффективны, как и личные. Наконец-то я снова чувствую себя собой.",
+    "rating": 5
+  },
+  {
+    "name": "Elena T.",
+    "text_en": "My teenager was resistant to therapy, but Dr. Popovici connected with her in a way no other professional could. We are so grateful for the positive changes we have seen.",
+    "text_ro": "Adolescenta mea era reticentă la terapie, dar doamna Popovici s-a conectat cu ea într-un mod în care niciun alt profesionist nu a putut. Suntem atât de recunoscători pentru schimbările pozitive pe care le-am văzut.",
+    "text_ru": "Мой подросток сопротивлялся терапии, но доктор Попович нашла с ней контакт так, как не смог ни один другой специалист. Мы так благодарны за положительные изменения, которые мы увидели.",
+    "rating": 5
+  }
+]

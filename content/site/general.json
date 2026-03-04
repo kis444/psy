@@ -22,18 +22,27 @@
       "price": 80,
       "duration": "50 min",
       "featured": false
-    },
+    }
+  ],
+  "contact": {
+    "phone": "+373 78 219 500",
+    "email": "daniela.popovici126@gmail.com",
+    "address": "Chisinau, Moldova",
+    "instagram": "https://www.instagram.com/femeielasoare/",
+    "facebook": "https://facebook.com/",
+    "telegram": "https://t.me/femeielasoare"
+  },
+  "settings": {
+    "name": "Dr. Popovici Daniela",
+    "title": "Licensed Psychologist"
+  },
+  "testimonials": [
     {
-      "id": "first-consultation",
-      "title_en": "First Consultation",
-      "title_ro": "Prima Consultație",
-      "title_ru": "Первая Консультация",
-      "description_en": "An introductory session at 50% off for new clients.",
-      "description_ro": "O sesiune introductivă cu 50% reducere pentru clienții noi.",
-      "description_ru": "Вводная сессия со скидкой 50% для новых клиентов.",
-      "price": 40,
-      "duration": "50 min",
-      "featured": true
+      "name": "Maria S.",
+      "text_en": "Dr. Popovici helped me through one of the most difficult periods of my life.",
+      "text_ro": "Doamna Popovici m-a ajutat în una dintre cele mai dificile perioade ale vieții mele.",
+      "text_ru": "Доктор Попович помогла мне пройти через один из самых трудных периодов моей жизни.",
+      "rating": 5
     }
   ]
 }

@@ -1,0 +1,72 @@
+// ACESTE DATE LE EDIȚEZI DOAR TU (DEZVOLTATORUL)
+// Clienta NU are acces în CMS la acestea
+
+export type Locale = "en" | "ro" | "ru"
+
+export const siteConfig = {
+  // HEADER - ce apare în bara de sus
+  header: {
+    name: "Dr. Popovici Daniela",
+    title: "Licensed Psychologist",
+    navigation: {
+      en: [
+        { label: "Home", href: "/" },
+        { label: "About", href: "/about" },
+        { label: "Services", href: "/services" },
+        { label: "Blog", href: "/blog" },
+        { label: "Testimonials", href: "/testimonials" },
+        { label: "Contact", href: "/contact" },
+      ],
+      ro: [
+        { label: "Acasă", href: "/" },
+        { label: "Despre", href: "/about" },
+        { label: "Servicii", href: "/services" },
+        { label: "Blog", href: "/blog" },
+        { label: "Testimoniale", href: "/testimonials" },
+        { label: "Contact", href: "/contact" },
+      ],
+      ru: [
+        { label: "Главная", href: "/" },
+        { label: "Обо мне", href: "/about" },
+        { label: "Услуги", href: "/services" },
+        { label: "Блог", href: "/blog" },
+        { label: "Отзывы", href: "/testimonials" },
+        { label: "Контакты", href: "/contact" },
+      ],
+    },
+    buttons: {
+      book_en: "Book a Session",
+      book_ro: "Programează o Ședință",
+      book_ru: "Записаться на прием"
+    }
+  },
+
+  // FOOTER - ce apare în josul paginii
+  footer: {
+    copyright: "© 2024 Dr. Popovici Daniela. All rights reserved.",
+    links: {
+      privacy: "/privacy",
+      terms: "/terms"
+    }
+  },
+
+  // CONTACT INFO - datele de contact (doar tu le modifici)
+  contact: {
+    phone: "+373 78 219 500",
+    email: "daniela.popovici126@gmail.com",
+    address: "Chisinau, Moldova",
+    social: {
+      instagram: "https://www.instagram.com/femeielasoare/",
+      facebook: "https://facebook.com/",
+      telegram: "https://t.me/femeielasoare",
+      linkedin: "https://linkedin.com/"
+    }
+  },
+
+  // CATEGORII BLOG - lista de categorii (doar tu le modifici)
+  blogCategories: {
+    en: ["All", "Anxiety", "Mindfulness", "Relationships", "Self-Growth", "Therapy"],
+    ro: ["Toate", "Anxietate", "Mindfulness", "Relații", "Dezvoltare Personală", "Terapie"],
+    ru: ["Все", "Тревога", "Осознанность", "Отношения", "Личностный Рост", "Терапия"]
+  }
+}

@@ -1,0 +1,80 @@
+[
+  {
+    "id": "individual-therapy",
+    "title_en": "Individual Therapy",
+    "title_ro": "Terapie Individuală",
+    "title_ru": "Индивидуальная Терапия",
+    "description_en": "One-on-one sessions tailored to your needs. We work together to address anxiety, depression, self-esteem, and personal growth in a safe, confidential environment.",
+    "description_ro": "Ședințe individuale adaptate nevoilor tale. Lucrăm împreună pentru a aborda anxietatea, depresia, stima de sine și creșterea personală într-un mediu sigur și confidențial.",
+    "description_ru": "Индивидуальные сессии, адаптированные к вашим потребностям. Мы работаем вместе, чтобы решить проблемы тревоги, депрессии, самооценки и личностного роста в безопасной, конфиденциальной обстановке.",
+    "price": 80,
+    "currency": "EUR",
+    "duration": "50 min",
+    "featured": false
+  },
+  {
+    "id": "first-consultation",
+    "title_en": "First Consultation",
+    "title_ro": "Prima Consultație",
+    "title_ru": "Первая Консультация",
+    "description_en": "An introductory session to understand your concerns, discuss goals, and create a personalized treatment plan. Available at 50% off for new clients.",
+    "description_ro": "O sesiune introductivă pentru a înțelege preocupările tale, a discuta obiectivele și a crea un plan de tratament personalizat. Disponibilă cu 50% reducere pentru clienții noi.",
+    "description_ru": "Вводная сессия для понимания ваших проблем, обсуждения целей и создания индивидуального плана лечения. Доступно со скидкой 50% для новых клиентов.",
+    "price": 40,
+    "currency": "EUR",
+    "duration": "50 min",
+    "featured": true
+  },
+  {
+    "id": "couples-therapy",
+    "title_en": "Couples Therapy",
+    "title_ro": "Terapie de Cuplu",
+    "title_ru": "Терапия для Пар",
+    "description_en": "Strengthen your relationship through improved communication, conflict resolution, and deeper emotional connection in a supportive therapeutic setting.",
+    "description_ro": "Consolidați-vă relația prin comunicare îmbunătățită, rezolvarea conflictelor și conexiune emoțională mai profundă într-un cadru terapeutic de susținere.",
+    "description_ru": "Укрепите ваши отношения через улучшение коммуникации, разрешение конфликтов и более глубокую эмоциональную связь в поддерживающей терапевтической среде.",
+    "price": 100,
+    "currency": "EUR",
+    "duration": "60 min",
+    "featured": false
+  },
+  {
+    "id": "online-consultation",
+    "title_en": "Online Consultation",
+    "title_ro": "Consultație Online",
+    "title_ru": "Онлайн Консультация",
+    "description_en": "Convenient virtual sessions from the comfort of your home. Same professional quality care with the flexibility of choosing your preferred environment.",
+    "description_ro": "Ședințe virtuale convenabile din confortul casei tale. Aceeași calitate profesională a îngrijirii cu flexibilitatea de a alege mediul preferat.",
+    "description_ru": "Удобные виртуальные сессии из комфорта вашего дома. То же профессиональное качество помощи с гибкостью выбора предпочтительной среды.",
+    "price": 70,
+    "currency": "EUR",
+    "duration": "50 min",
+    "featured": false
+  },
+  {
+    "id": "group-therapy",
+    "title_en": "Group Therapy",
+    "title_ro": "Terapie de Grup",
+    "title_ru": "Групповая Терапия",
+    "description_en": "Join a small, supportive group to share experiences and develop coping strategies. A powerful way to realize you are not alone in your journey.",
+    "description_ro": "Alătură-te unui grup mic, de susținere, pentru a împărtăși experiențe și a dezvolta strategii de adaptare. O modalitate puternică de a realiza că nu ești singur în călătoria ta.",
+    "description_ru": "Присоединяйтесь к небольшой поддерживающей группе, чтобы делиться опытом и разрабатывать стратегии преодоления. Мощный способ осознать, что вы не одиноки в своем путешествии.",
+    "price": 45,
+    "currency": "EUR",
+    "duration": "90 min",
+    "featured": false
+  },
+  {
+    "id": "child-psychology",
+    "title_en": "Child & Adolescent Therapy",
+    "title_ro": "Psihologie pentru Copii și Adolescenți",
+    "title_ru": "Детская и Подростковая Психология",
+    "description_en": "Specialized therapy for young minds. Using age-appropriate techniques to help children and teens navigate emotional challenges, behavioral issues, and developmental transitions.",
+    "description_ro": "Terapie specializată pentru mințile tinere. Folosind tehnici adecvate vârstei pentru a ajuta copiii și adolescenții să navigheze provocările emoționale, problemele comportamentale și tranzițiile de dezvoltare.",
+    "description_ru": "Специализированная терапия для юных умов. Использование возрастных методик, чтобы помочь детям и подросткам справляться с эмоциональными трудностями, поведенческими проблемами и переходными периодами развития.",
+    "price": 75,
+    "currency": "EUR",
+    "duration": "45 min",
+    "featured": false
+  }
+]

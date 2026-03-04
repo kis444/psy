@@ -9,58 +9,102 @@ media_folder: public/images
 public_folder: /images
 
 collections:
-  - name: "site"
-    label: "Site Content"
+  # DOAR CLIENTA VEDEA ASTA ÎN CMS
+  - name: "hero"
+    label: "Hero Section"
+    folder: "content/cms"
+    create: false
     files:
-      - name: "general"
-        label: "General Content"
-        file: "content/site/general.json"
+      - name: "hero"
+        label: "Hero Section"
+        file: "content/cms/hero.json"
         fields:
-          - label: "Hero Section"
-            name: "hero"
-            widget: "object"
-            fields:
-              - {label: "Welcome Text (EN)", name: "welcome_en", widget: "string"}
-              - {label: "Welcome Text (RO)", name: "welcome_ro", widget: "string"}
-              - {label: "Welcome Text (RU)", name: "welcome_ru", widget: "string"}
-              - {label: "Title (EN)", name: "title_en", widget: "string"}
-              - {label: "Title (RO)", name: "title_ro", widget: "string"}
-              - {label: "Title (RU)", name: "title_ru", widget: "string"}
-              - {label: "Description (EN)", name: "description_en", widget: "text"}
-              - {label: "Description (RO)", name: "description_ro", widget: "text"}
-              - {label: "Description (RU)", name: "description_ru", widget: "text"}
-          
-          - label: "Services"
+          - { label: "Welcome Text (EN)", name: "welcome_en", widget: "string" }
+          - { label: "Welcome Text (RO)", name: "welcome_ro", widget: "string" }
+          - { label: "Welcome Text (RU)", name: "welcome_ru", widget: "string" }
+          - { label: "Title (EN)", name: "title_en", widget: "string" }
+          - { label: "Title (RO)", name: "title_ro", widget: "string" }
+          - { label: "Title (RU)", name: "title_ru", widget: "string" }
+          - { label: "Description (EN)", name: "description_en", widget: "text" }
+          - { label: "Description (RO)", name: "description_ro", widget: "text" }
+          - { label: "Description (RU)", name: "description_ru", widget: "text" }
+
+  - name: "services"
+    label: "Services"
+    folder: "content/cms"
+    create: false
+    files:
+      - name: "services"
+        label: "Services"
+        file: "content/cms/services.json"
+        fields:
+          - label: "Services List"
             name: "services"
             widget: "list"
             fields:
-              - {label: "ID", name: "id", widget: "string"}
-              - {label: "Title (EN)", name: "title_en", widget: "string"}
-              - {label: "Title (RO)", name: "title_ro", widget: "string"}
-              - {label: "Title (RU)", name: "title_ru", widget: "string"}
-              - {label: "Description (EN)", name: "description_en", widget: "text"}
-              - {label: "Description (RO)", name: "description_ro", widget: "text"}
-              - {label: "Description (RU)", name: "description_ru", widget: "text"}
-              - {label: "Price", name: "price", widget: "number"}
-              - {label: "Duration", name: "duration", widget: "string"}
-              - {label: "Featured", name: "featured", widget: "boolean", default: false}
+              - { label: "ID", name: "id", widget: "string" }
+              - { label: "Title (EN)", name: "title_en", widget: "string" }
+              - { label: "Title (RO)", name: "title_ro", widget: "string" }
+              - { label: "Title (RU)", name: "title_ru", widget: "string" }
+              - { label: "Description (EN)", name: "description_en", widget: "text" }
+              - { label: "Description (RO)", name: "description_ro", widget: "text" }
+              - { label: "Description (RU)", name: "description_ru", widget: "text" }
+              - { label: "Price", name: "price", widget: "number" }
+              - { label: "Currency", name: "currency", widget: "string" }
+              - { label: "Duration", name: "duration", widget: "string" }
+              - { label: "Featured", name: "featured", widget: "boolean", default: false }
+
+  - name: "testimonials"
+    label: "Testimonials"
+    folder: "content/cms"
+    create: false
+    files:
+      - name: "testimonials"
+        label: "Testimonials"
+        file: "content/cms/testimonials.json"
+        fields:
+          - label: "Testimonials List"
+            name: "testimonials"
+            widget: "list"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Text (EN)", name: "text_en", widget: "text" }
+              - { label: "Text (RO)", name: "text_ro", widget: "text" }
+              - { label: "Text (RU)", name: "text_ru", widget: "text" }
+              - { label: "Rating", name: "rating", widget: "number", min: 1, max: 5 }
 
   - name: "blog"
     label: "Blog Posts"
-    folder: "content/blog"
+    folder: "content/cms"
     create: true
     slug: "{{slug}}"
     fields:
-      - {label: "Slug (URL)", name: "slug", widget: "string"}
-      - {label: "Title (EN)", name: "title_en", widget: "string"}
-      - {label: "Title (RO)", name: "title_ro", widget: "string"}
-      - {label: "Title (RU)", name: "title_ru", widget: "string"}
-      - {label: "Excerpt (EN)", name: "excerpt_en", widget: "text"}
-      - {label: "Excerpt (RO)", name: "excerpt_ro", widget: "text"}
-      - {label: "Excerpt (RU)", name: "excerpt_ru", widget: "text"}
-      - {label: "Category", name: "category", widget: "string"}
-      - {label: "Date", name: "date", widget: "datetime"}
-      - {label: "Image", name: "image", widget: "image"}
-      - {label: "Body (EN)", name: "body_en", widget: "markdown"}
-      - {label: "Body (RO)", name: "body_ro", widget: "markdown"}
-      - {label: "Body (RU)", name: "body_ru", widget: "markdown"}
+      - { label: "Slug (URL)", name: "slug", widget: "string" }
+      - { label: "Title (EN)", name: "title_en", widget: "string" }
+      - { label: "Title (RO)", name: "title_ro", widget: "string" }
+      - { label: "Title (RU)", name: "title_ru", widget: "string" }
+      - { label: "Excerpt (EN)", name: "excerpt_en", widget: "text" }
+      - { label: "Excerpt (RO)", name: "excerpt_ro", widget: "text" }
+      - { label: "Excerpt (RU)", name: "excerpt_ru", widget: "text" }
+      - { label: "Category", name: "category", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Body (EN)", name: "body_en", widget: "markdown" }
+      - { label: "Body (RO)", name: "body_ro", widget: "markdown" }
+      - { label: "Body (RU)", name: "body_ru", widget: "markdown" }
+
+  - name: "about"
+    label: "About Page"
+    folder: "content/cms"
+    create: false
+    files:
+      - name: "about"
+        label: "About Page"
+        file: "content/cms/about.json"
+        fields:
+          - { label: "Title (EN)", name: "title_en", widget: "string" }
+          - { label: "Title (RO)", name: "title_ro", widget: "string" }
+          - { label: "Title (RU)", name: "title_ru", widget: "string" }
+          - { label: "Content (EN)", name: "content_en", widget: "markdown" }
+          - { label: "Content (RO)", name: "content_ro", widget: "markdown" }
+          - { label: "Content (RU)", name: "content_ru", widget: "markdown" }

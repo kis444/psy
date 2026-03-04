@@ -4,10 +4,11 @@ import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
-import { useLanguage } from "@/context/LanguageContext"  // ← Schimbat
-import { navigation, siteConfig } from "@/lib/content"
+import { useLanguage } from "@/context/LanguageContext"
+import { navigation } from "@/lib/content"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { cn } from "@/lib/utils"
+import generalContent from "@/content/site/general.json"
 
 type NavItem = {
   label: string
@@ -21,6 +22,9 @@ export function Header() {
   
   // Get navigation items for current language
   const navItems: NavItem[] = navigation[locale]
+  
+  // Get site settings from CMS
+  const siteSettings = generalContent.settings
 
   // Translations for "Book a Session" button
   const bookButtonText: Record<string, string> = {
@@ -30,15 +34,14 @@ export function Header() {
   }
 
   return (
-<header className="sticky top-0 z-50 bg-primary/50 backdrop-blur-md border-b border-primary/20"> 
-
-     <div className="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
+    <header className="sticky top-0 z-50 bg-primary/50 backdrop-blur-md border-b border-primary/20">
+      <div className="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
         <Link href="/" className="flex flex-col" aria-label="Home">
           <span className="font-serif text-xl font-bold tracking-tight text-foreground">
-            {siteConfig.name}
+            {siteSettings.name}
           </span>
           <span className="text-xs text-muted-foreground tracking-widest uppercase">
-            {siteConfig.title}
+            {siteSettings.title}
           </span>
         </Link>
 
