@@ -325,11 +325,13 @@ function TestimonialsTab() {
 
 // ─── Tab: Blog ─────────────────────────────────────────────────────────────
 
+// ─── Tab: Blog ─────────────────────────────────────────────────────────────
 function BlogTab() {
   const [lang, setLang] = useState("ro")
   const [saved, setSaved] = useState(false)
   const [posts, setPosts] = useState<any[]>([])
   const [editing, setEditing] = useState<number | null>(null)
+  const [uploading, setUploading] = useState(false)
 
   useEffect(() => {
     fetch("/api/admin/content?file=blog/blog")
@@ -352,7 +354,7 @@ function BlogTab() {
       body_en: "", body_ro: "", body_ru: "",
       category: "Therapy",
       date: new Date().toISOString().split("T")[0],
-      image: "/images/blog-1.jpg",
+      image: "",
     }])
     setEditing(posts.length)
     setSaved(false)
@@ -362,6 +364,32 @@ function BlogTab() {
     setPosts((p) => p.filter((_, i) => i !== idx))
     if (editing === idx) setEditing(null)
     setSaved(false)
+  }
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, idx: number) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    setUploading(true)
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+
+      const response = await fetch(`/api/upload?filename=${encodeURIComponent(file.name)}`, {
+        method: 'POST',
+        body: file,
+      })
+
+      if (!response.ok) throw new Error('Upload failed')
+      
+      const blob = await response.json()
+      update(idx, 'image', blob.url)
+    } catch (error) {
+      console.error('Eroare la upload:', error)
+      alert('Nu s-a putut încărca imaginea. Încearcă din nou.')
+    } finally {
+      setUploading(false)
+    }
   }
 
   function save() {
@@ -391,9 +419,20 @@ function BlogTab() {
             key={post.slug}
             className="flex items-center justify-between rounded-lg border border-slate-200 px-4 py-3"
           >
-            <div>
-              <p className="text-sm font-medium text-slate-700">{post.title_ro || post.slug}</p>
-              <p className="text-xs text-slate-400">{post.date} · {post.category}</p>
+            <div className="flex items-center gap-3">
+              {post.image && (
+                <div className="w-10 h-10 relative rounded overflow-hidden flex-shrink-0">
+                  <img 
+                    src={post.image} 
+                    alt={post.title_ro}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
+              <div>
+                <p className="text-sm font-medium text-slate-700">{post.title_ro || post.slug}</p>
+                <p className="text-xs text-slate-400">{post.date} · {post.category}</p>
+              </div>
             </div>
             <div className="flex items-center gap-2">
               <button
@@ -417,6 +456,44 @@ function BlogTab() {
             Editează: {posts[editing].title_ro || posts[editing].slug}
           </h3>
           <LangTabs active={lang} onChange={setLang} />
+          
+          {/* 🔥 ZONA DE UPLOAD IMAGINE 🔥 */}
+          <div className="mb-6 p-4 bg-white rounded-lg border border-slate-200">
+            <label className="block text-sm font-medium text-slate-700 mb-2">
+              Imagine articol
+            </label>
+            <div className="flex flex-col gap-4">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => handleImageUpload(e, editing)}
+                className="block w-full text-sm text-slate-500
+                  file:mr-4 file:py-2 file:px-4
+                  file:rounded-full file:border-0
+                  file:text-sm file:font-semibold
+                  file:bg-violet-50 file:text-violet-700
+                  hover:file:bg-violet-100"
+              />
+              
+              {uploading && (
+                <p className="text-sm text-violet-600">Se încarcă imaginea...</p>
+              )}
+              
+              {posts[editing].image && (
+                <div className="mt-2">
+                  <p className="text-xs text-slate-500 mb-2">Previzualizare:</p>
+                  <div className="relative w-48 h-48 rounded-lg overflow-hidden border border-slate-200">
+                    <img 
+                      src={posts[editing].image} 
+                      alt="Previzualizare"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
           <div className="flex flex-col gap-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               <Field label="Slug (URL)" value={posts[editing].slug} onChange={(v) => update(editing, "slug", v)} />
