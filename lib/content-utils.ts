@@ -1,24 +1,44 @@
 // lib/content-utils.ts
-// Funcții pentru a citi datele din fișierele JSON (content/cms/).
+// Funcții pentru a citi datele din MongoDB via API
 // Folosite atât de paginile publice cât și de panoul admin.
 
 import type { Locale, Service, Testimonial, BlogPost, HeroContent, AboutContent, SiteSettings } from "./content"
 
-// ─── Funcții de citire (client-side, import static) ───────────────────────
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE || ''
+
+// ─── Funcții de citire (client-side, via API) ─────────────────────────────
 
 export async function getServices(): Promise<Service[]> {
-  const data = await import("@/content/cms/services.json")
-  return data.default as Service[]
+  try {
+    const response = await fetch(`${API_BASE}/api/admin/content?file=services`)
+    if (!response.ok) return []
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching services:', error)
+    return []
+  }
 }
 
 export async function getTestimonials(): Promise<Testimonial[]> {
-  const data = await import("@/content/cms/testimonials.json")
-  return data.default as Testimonial[]
+  try {
+    const response = await fetch(`${API_BASE}/api/admin/content?file=testimonials`)
+    if (!response.ok) return []
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching testimonials:', error)
+    return []
+  }
 }
 
 export async function getBlogPosts(): Promise<BlogPost[]> {
-  const data = await import("@/content/cms/blog/blog.json")
-  return data.default as BlogPost[]
+  try {
+    const response = await fetch(`${API_BASE}/api/admin/content?file=blog/blog`)
+    if (!response.ok) return []
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching blog posts:', error)
+    return []
+  }
 }
 
 export async function getBlogPost(slug: string): Promise<BlogPost | null> {
@@ -27,24 +47,42 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
 }
 
 export async function getHeroContent(): Promise<HeroContent> {
-  const data = await import("@/content/cms/hero.json")
-  return data.default as HeroContent
+  try {
+    const response = await fetch(`${API_BASE}/api/admin/content?file=hero`)
+    if (!response.ok) return {} as HeroContent
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching hero:', error)
+    return {} as HeroContent
+  }
 }
 
 export async function getAboutContent(): Promise<AboutContent> {
-  const data = await import("@/content/cms/about.json")
-  return data.default as AboutContent
+  try {
+    const response = await fetch(`${API_BASE}/api/admin/content?file=about`)
+    if (!response.ok) return {} as AboutContent
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching about:', error)
+    return {} as AboutContent
+  }
 }
 
 export async function getSiteSettings(): Promise<SiteSettings> {
-  const data = await import("@/content/cms/settings.json")
-  return data.default as SiteSettings
+  try {
+    const response = await fetch(`${API_BASE}/api/admin/content?file=settings`)
+    if (!response.ok) return {} as SiteSettings
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching settings:', error)
+    return {} as SiteSettings
+  }
 }
 
-// ─── Helper localizare (re-exportat pentru compatibilitate) ───────────────
+// ─── Helper localizare ────────────────────────────────────────────────────
 
 export function getL(obj: Record<string, any>, field: string, locale: Locale): string {
-  return obj[`${field}_${locale}`] ?? obj[`${field}_en`] ?? obj[field] ?? ""
+  return obj?.[`${field}_${locale}`] ?? obj?.[`${field}_en`] ?? obj?.[field] ?? ""
 }
 
 /** @deprecated Folosește getL() */
