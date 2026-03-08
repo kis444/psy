@@ -1,19 +1,20 @@
-import type { Metadata } from "next"
+"use client"
+
+import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, Award, BookOpen, GraduationCap, ShieldCheck } from "lucide-react"
 import { Section, SectionHeader } from "@/components/section"
+import { useLanguage } from "@/context/LanguageContext"
+import { getAboutContent, getL } from "@/lib/content-utils"
+import type { AboutContent } from "@/lib/content"
 
-export const metadata: Metadata = {
-  title: "About",
-  description:
-    "Learn more about Dr. Popovici Daniela, her education, certifications, and approach to psychological therapy.",
-}
-
+// Credentials sunt statice (nu se schimbă des) — le lăsăm hardcodate
+// Dacă Daniela vrea să le editeze mai târziu, le mutăm în JSON
 const credentials = [
   {
     icon: GraduationCap,
-    title: "Education",
+    title: { en: "Education", ro: "Educație", ru: "Образование" },
     items: [
       "Master of Psychology, University of Bucharest",
       "Bachelor of Clinical Psychology, Moldova State University",
@@ -22,7 +23,7 @@ const credentials = [
   },
   {
     icon: ShieldCheck,
-    title: "License",
+    title: { en: "License", ro: "Licență", ru: "Лицензия" },
     items: [
       "Licensed Clinical Psychologist #MD-2847",
       "Registered with the National Board of Psychology",
@@ -31,7 +32,7 @@ const credentials = [
   },
   {
     icon: Award,
-    title: "Certifications",
+    title: { en: "Certifications", ro: "Certificări", ru: "Сертификаты" },
     items: [
       "Cognitive Behavioral Therapy (CBT)",
       "EMDR Therapy",
@@ -41,7 +42,7 @@ const credentials = [
   },
   {
     icon: BookOpen,
-    title: "Specializations",
+    title: { en: "Specializations", ro: "Specializări", ru: "Специализации" },
     items: [
       "Anxiety & Panic Disorders",
       "Depression & Mood Disorders",
@@ -51,7 +52,28 @@ const credentials = [
   },
 ]
 
+const labels = {
+  aboutMe:    { en: "About Me",            ro: "Despre Mine",          ru: "Обо Мне" },
+  healing:    { en: "A dedicated space for your healing", ro: "Un spațiu dedicat vindecării tale", ru: "Пространство для вашего исцеления" },
+  qualif:     { en: "Qualifications",      ro: "Calificări",           ru: "Квалификация" },
+  eduCred:    { en: "Education & Credentials", ro: "Educație & Credențiale", ru: "Образование и Достижения" },
+  eduDesc:    { en: "A strong foundation of education and ongoing professional development.", ro: "O bază solidă de educație și dezvoltare profesională continuă.", ru: "Прочная основа образования и постоянного профессионального развития." },
+  approach:   { en: "My Approach",         ro: "Abordarea Mea",        ru: "Мой Подход" },
+  approachH:  { en: "Therapy that meets you where you are", ro: "Terapie care te întâlnește acolo unde ești", ru: "Терапия, которая встречает вас там, где вы есть" },
+  schedule:   { en: "Schedule a Consultation", ro: "Programează o Consultație", ru: "Записаться на Консультацию" },
+}
+
+type L = "en" | "ro" | "ru"
+
 export default function AboutPage() {
+  const { locale } = useLanguage()
+  const l = locale as L
+  const [about, setAbout] = useState<AboutContent | null>(null)
+
+  useEffect(() => {
+    getAboutContent().then(setAbout)
+  }, [])
+
   return (
     <>
       {/* Hero */}
@@ -72,28 +94,17 @@ export default function AboutPage() {
           </div>
           <div className="flex-1">
             <p className="text-sm font-medium uppercase tracking-widest text-primary mb-4">
-              About Me
+              {labels.aboutMe[l]}
             </p>
             <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight text-balance">
-              A dedicated space for your healing
+              {labels.healing[l]}
             </h1>
             <div className="mt-6 flex flex-col gap-4 text-muted-foreground leading-relaxed">
-              <p>
-                I am Dr. Popovici Daniela, a licensed clinical psychologist with
-                over 10 years of experience helping individuals, couples, and
-                families navigate life&apos;s challenges.
-              </p>
-              <p>
-                My approach is rooted in empathy, evidence-based methods, and a
-                genuine belief in every person&apos;s capacity for growth and
-                change. I create a safe, non-judgmental environment where you
-                can explore your thoughts and feelings at your own pace.
-              </p>
-              <p>
-                Whether you are dealing with anxiety, depression, relationship
-                difficulties, or simply seeking personal growth, I am here to
-                walk alongside you on your journey toward well-being.
-              </p>
+              {about ? (
+                <p>{getL(about, "intro", l)}</p>
+              ) : (
+                <div className="h-24 bg-muted animate-pulse rounded-lg" />
+              )}
             </div>
           </div>
         </div>
@@ -102,30 +113,24 @@ export default function AboutPage() {
       {/* Credentials */}
       <Section variant="soft">
         <SectionHeader
-          label="Qualifications"
-          title="Education & Credentials"
-          description="A strong foundation of education and ongoing professional development to provide you with the best possible care."
+          label={labels.qualif[l]}
+          title={labels.eduCred[l]}
+          description={labels.eduDesc[l]}
         />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-          {credentials.map((credential) => (
-            <div
-              key={credential.title}
-              className="rounded-2xl bg-card p-8"
-            >
+          {credentials.map((cred) => (
+            <div key={cred.title.en} className="rounded-2xl bg-card p-8">
               <div className="flex items-center gap-3 mb-5">
                 <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-primary/10">
-                  <credential.icon className="h-5 w-5 text-primary" />
+                  <cred.icon className="h-5 w-5 text-primary" />
                 </div>
                 <h3 className="font-serif text-xl font-semibold text-foreground">
-                  {credential.title}
+                  {cred.title[l]}
                 </h3>
               </div>
               <ul className="flex flex-col gap-2.5">
-                {credential.items.map((item) => (
-                  <li
-                    key={item}
-                    className="text-sm text-muted-foreground leading-relaxed flex items-start gap-2"
-                  >
+                {cred.items.map((item) => (
+                  <li key={item} className="text-sm text-muted-foreground leading-relaxed flex items-start gap-2">
                     <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
                     {item}
                   </li>
@@ -140,28 +145,23 @@ export default function AboutPage() {
       <Section>
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-sm font-medium uppercase tracking-widest text-primary mb-4">
-            My Approach
+            {labels.approach[l]}
           </p>
           <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground text-balance">
-            Therapy that meets you where you are
+            {labels.approachH[l]}
           </h2>
-          <div className="mt-8 flex flex-col gap-4 text-muted-foreground leading-relaxed text-pretty">
-            <p>
-              I draw from multiple evidence-based modalities including Cognitive
-              Behavioral Therapy (CBT), EMDR, and mindfulness-based approaches,
-              tailoring each session to your unique needs and goals.
-            </p>
-            <p>
-              My philosophy is simple: you are the expert on your own life. My
-              role is to provide the tools, support, and guidance you need to
-              unlock your inner strength and create lasting change.
-            </p>
+          <div className="mt-8 text-muted-foreground leading-relaxed text-pretty">
+            {about ? (
+              <p>{getL(about, "approach", l)}</p>
+            ) : (
+              <div className="h-16 bg-muted animate-pulse rounded-lg" />
+            )}
           </div>
           <Link
             href="/contact"
             className="mt-8 inline-flex items-center justify-center rounded-full bg-primary px-8 py-3.5 text-base font-semibold text-primary-foreground transition-all hover:opacity-90 gap-2"
           >
-            Schedule a Consultation
+            {labels.schedule[l]}
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

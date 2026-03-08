@@ -1,61 +1,49 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { useLanguage } from "@/context/LanguageContext"
-import { navigation } from "@/lib/content"
+import { navigation, bookButtonText } from "@/lib/content"
+import { getL, getSiteSettings } from "@/lib/content-utils"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { cn } from "@/lib/utils"
-import generalContent from "@/content/site/general.json"
-
-type NavItem = {
-  label: string
-  href: string
-}
+import type { SiteSettings } from "@/lib/content"
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [settings, setSettings] = useState<SiteSettings | null>(null)
   const pathname = usePathname()
   const { locale } = useLanguage()
-  
-  // Get navigation items for current language
-  const navItems: NavItem[] = navigation[locale]
-  
-  // Get site settings from CMS
-  const siteSettings = generalContent.settings
 
-  // Translations for "Book a Session" button
-  const bookButtonText: Record<string, string> = {
-    en: "Book a Session",
-    ro: "Programează o Ședință",
-    ru: "Записаться на прием"
-  }
+  useEffect(() => {
+    getSiteSettings().then(setSettings)
+  }, [])
+
+  const navItems = navigation[locale]
 
   return (
     <header className="sticky top-0 z-50 bg-primary/50 backdrop-blur-md border-b border-primary/20">
       <div className="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
         <Link href="/" className="flex flex-col" aria-label="Home">
           <span className="font-serif text-xl font-bold tracking-tight text-foreground">
-            {siteSettings.name}
+            {settings?.name ?? "Dr. Popovici Daniela"}
           </span>
           <span className="text-xs text-muted-foreground tracking-widest uppercase">
-            {siteSettings.title}
+            {settings ? getL(settings, "title", locale) : "Licensed Psychologist"}
           </span>
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-8" aria-label="Main navigation">
-          {navItems.map((item: NavItem) => (
+          {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
                 "text-sm font-medium transition-colors hover:text-primary",
-                pathname === item.href
-                  ? "text-primary"
-                  : "text-muted-foreground"
+                pathname === item.href ? "text-primary" : "text-muted-foreground"
               )}
             >
               {item.label}
@@ -91,16 +79,14 @@ export function Header() {
           aria-label="Mobile navigation"
         >
           <div className="px-4 py-6 flex flex-col gap-4">
-            {navItems.map((item: NavItem) => (
+            {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
                 className={cn(
                   "text-base font-medium transition-colors py-2",
-                  pathname === item.href
-                    ? "text-primary"
-                    : "text-muted-foreground"
+                  pathname === item.href ? "text-primary" : "text-muted-foreground"
                 )}
               >
                 {item.label}

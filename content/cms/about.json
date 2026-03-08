@@ -1,8 +1,13 @@
 {
   "title_en": "About Dr. Popovici Daniela",
   "title_ro": "Despre Dr. Popovici Daniela",
-  "title_ru": "О Др. Попович Даниела",
-  "content_en": "Your about page content here...",
-  "content_ro": "Conținutul paginii about aici...",
-  "content_ru": "Содержание страницы about здесь..."
+  "title_ru": "О Докторе Попович Даниела",
+
+  "intro_en": "I am Dr. Popovici Daniela, a licensed clinical psychologist with over 10 years of experience helping individuals, couples, and families navigate life's challenges. My approach is rooted in empathy, evidence-based methods, and a genuine belief in every person's capacity for growth and change. I create a safe, non-judgmental environment where you can explore your thoughts and feelings at your own pace.",
+  "intro_ro": "Sunt Dr. Popovici Daniela, psiholog clinician licențiat cu peste 10 ani de experiență în ajutorarea persoanelor, cuplurilor și familiilor să navigheze provocările vieții. Abordarea mea este bazată pe empatie, metode bazate pe dovezi și o credință sinceră în capacitatea fiecărei persoane de a crește și de a se schimba. Creez un mediu sigur, fără judecăți, în care poți explora gândurile și sentimentele în propriul ritm.",
+  "intro_ru": "Я доктор Попович Даниела, лицензированный клинический психолог с более чем 10-летним опытом помощи людям, парам и семьям в преодолении жизненных трудностей. Мой подход основан на эмпатии, доказательных методах и искренней вере в способность каждого человека расти и меняться. Я создаю безопасную, непредвзятую среду, где вы можете исследовать свои мысли и чувства в своем темпе.",
+
+  "approach_en": "I draw from multiple evidence-based modalities including Cognitive Behavioral Therapy (CBT), EMDR, and mindfulness-based approaches, tailoring each session to your unique needs and goals. My philosophy is simple: you are the expert on your own life. My role is to provide the tools, support, and guidance you need to unlock your inner strength and create lasting change.",
+  "approach_ro": "Mă bazez pe multiple modalități bazate pe dovezi, inclusiv Terapia Cognitiv-Comportamentală (TCC), EMDR și abordările bazate pe mindfulness, adaptând fiecare ședință la nevoile și obiectivele tale unice. Filosofia mea este simplă: tu ești expertul propriei tale vieți. Rolul meu este să îți ofer instrumentele, sprijinul și îndrumarea de care ai nevoie pentru a-ți debloca puterea interioară și a crea schimbări durabile.",
+  "approach_ru": "Я использую несколько доказательных подходов, включая Когнитивно-поведенческую терапию (КПТ), EMDR и практики осознанности, адаптируя каждую сессию к вашим уникальным потребностям и целям. Моя философия проста: вы — эксперт своей собственной жизни. Моя роль — предоставить инструменты, поддержку и руководство, необходимые для раскрытия вашей внутренней силы и создания долгосрочных изменений."
 }
