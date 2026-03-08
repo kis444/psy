@@ -9,18 +9,47 @@ import { useLanguage } from "@/context/LanguageContext"
 import { getBlogPosts, getL } from "@/lib/content-utils"
 import type { BlogPost } from "@/lib/content"
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
+interface Props {
+  params: Promise<{ slug: string }> | { slug: string }
+}
+
+export default function BlogPostPage({ params }: Props) {
   const { locale } = useLanguage()
   const [post, setPost] = useState<BlogPost | null>(null)
   const [loading, setLoading] = useState(true)
+  const [slug, setSlug] = useState<string>("")
+
+  // Extrage slug-ul din params (Next.js 15)
+  useEffect(() => {
+    const resolveParams = async () => {
+      const resolvedParams = await params
+      setSlug(resolvedParams.slug)
+    }
+    resolveParams()
+  }, [params])
 
   useEffect(() => {
-    getBlogPosts().then((posts) => {
-      const found = posts.find((p) => p.slug === params.slug)
-      setPost(found || null)
-      setLoading(false)
-    })
-  }, [params.slug])
+    if (!slug) return
+
+    const loadPost = async () => {
+      try {
+        console.log("Loading posts for slug:", slug)
+        const posts = await getBlogPosts()
+        console.log("Posts loaded:", posts.length)
+        
+        const found = posts.find(p => p.slug === slug)
+        console.log("Found post:", found?.title_ro)
+        
+        setPost(found || null)
+      } catch (error) {
+        console.error("Error loading post:", error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    
+    loadPost()
+  }, [slug])
 
   if (loading) {
     return (
@@ -37,6 +66,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
       <Section>
         <div className="text-center py-16">
           <h1 className="text-2xl font-bold mb-4">Articol negăsit</h1>
+          <p className="text-muted-foreground mb-4">Caut după: {slug || "slug necunoscut"}</p>
           <Link href="/blog" className="text-primary hover:underline">
             Înapoi la blog
           </Link>
@@ -105,12 +135,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         </div>
 
         <div
-          className="prose prose-lg max-w-none
-            [&>h2]:font-serif [&>h2]:text-2xl [&>h2]:font-semibold [&>h2]:text-foreground [&>h2]:mt-10 [&>h2]:mb-4
-            [&>p]:text-muted-foreground [&>p]:leading-relaxed [&>p]:mb-6
-            [&>ul]:text-muted-foreground [&>ul]:leading-relaxed [&>ul]:mb-6 [&>ul]:pl-6
-            [&>ul>li]:mb-2 [&>ul>li]:list-disc
-          "
+          className="prose prose-lg max-w-none"
           dangerouslySetInnerHTML={{
             __html: getL(post, "body", locale) || "<p>Conținut în curând...</p>",
           }}
