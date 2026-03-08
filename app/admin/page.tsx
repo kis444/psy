@@ -8,7 +8,7 @@ import { Save, LogOut, FileText, Settings, Layers, MessageSquare, BookOpen, Plus
 type Tab = "hero" | "about" | "services" | "testimonials" | "blog" | "settings"
 
 // ─── Parolă admin (schimb-o în .env.local: NEXT_PUBLIC_ADMIN_PASSWORD) ────
-const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD ?? "daniela2024"
+const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD ?? "porumbconservat612"
 
 // ─── Componente mici ───────────────────────────────────────────────────────
 
